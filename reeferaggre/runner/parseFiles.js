@@ -82,9 +82,3 @@ const job = schedule.scheduleJob('*/5 * * * *', function (fireDate) {
         }
     }
 )
-
-
-// just to check what We have there
-// const dataFromDB = db.data.myCollection;
-// console.log(dataFromDB);
-

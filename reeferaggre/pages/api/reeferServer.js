@@ -1,18 +1,17 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
-import {join, dirname, resolve} from "path";
-import {JSONFile, Low} from "lowdb"
+import fs from "fs"
 
 
 
+export default async function (req, res) {
+    try {
+        const file_data = await fs.promises.readFile('./db.json')
+        const json_data = JSON.parse(file_data)
 
-
-export default async function handler(req, res) {
-    //database init
-    const file = join(resolve(), '../../db.json')
-    const adapter = new JSONFile(file)
-    const db = new Low(adapter)
-    await db.read()
-    const dataFromDB = db.data;
-    res.status(200).json({dataFromDB})
+        res.status(200).json(json_data.data)
+    }
+    catch (error) {
+        console.log(error)
+        res.status(500).json({ error: 'Error reading data' })
+    }
 }
