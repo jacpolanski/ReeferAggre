@@ -1,9 +1,11 @@
 import fs from "fs";
-import {join, resolve} from "path";
+import {join, dirname, resolve} from "path";
 
 import * as schedule from "node-schedule"
 import papaparse from "papaparse"
 import {JSONFile, Low} from "lowdb"
+
+const dir = "./runner/csv/"
 
 //database init
 const file = join(resolve(), 'db.json')
@@ -52,12 +54,8 @@ const fillDbWithData = (data, file) => {
 
 }
 
-// run once each 5 minutes
-// const job = schedule.scheduleJob('*/5 * * * * *', function (fireDate) {
-
 const constructDataBase = dir => {
     const files = getFilenames(dir)
-    // console.log(files);
 
     files.forEach(file => {
         const data = getData(dir, file)
@@ -65,7 +63,26 @@ const constructDataBase = dir => {
     })
 }
 
-constructDataBase("./runner/csv/")
+if (db.data.files.length === 0) {
+    constructDataBase(dir)
+}
+
+// run once each 5 minutes
+const job = schedule.scheduleJob('*/5 * * * *', function (fireDate) {
+        const filesDB = db.data.files
+        const filesDIR = getFilenames(dir)
+        let differenceFiles = filesDIR.filter(file => !filesDB.includes(file))
+        console.log(differenceFiles)
+
+        if (differenceFiles.length !== 0) {
+            differenceFiles.forEach(file => {
+                const data = getData(dir, file)
+                fillDbWithData(data, file);
+            })
+        }
+    }
+)
+
 
 // just to check what We have there
 // const dataFromDB = db.data.myCollection;
