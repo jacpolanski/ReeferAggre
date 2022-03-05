@@ -1,0 +1,60 @@
+@use "sass:math";
+
+
+body {
+  height: 100vh;
+  background-image: linear-gradient(180deg, #fff, #66a6ff);
+  background-attachment: fixed;
+
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-family: 'Bowlby One SC', cursive;
+
+  &-aggre {
+    color: #0178fd
+  }
+
+  &-snowflake {
+    color: #0178fd;
+    margin-right: .2rem;
+    font-size: 2.5rem;
+    filter: drop-shadow(0px 0px 10px #0178fd);
+  }
+}
+
+.login {
+  font-size: 45px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+
+  &.snowflake {
+
+    position: absolute;
+
+    color: rgba(1,120,253,.1);
+    margin-right: .2rem;
+    font-size: 150px;
+    filter: drop-shadow(0px 0px 10px #0178fd);
+    z-index: -100;
+  }
+}
+
+.doughnut {
+  max-width: 300px;
+  max-height: 300px;
+  margin: 0 auto;
+}
+
+.welcome-reeferaggre {
+  font-size: 3rem;
+}
