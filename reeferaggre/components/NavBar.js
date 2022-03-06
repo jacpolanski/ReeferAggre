@@ -11,17 +11,19 @@ const NavBar = () => {
         <>
             <Navbar bg="light" expand="lg" className="bg-opacity-75">
                 <Container>
-                    <LogoMain />
+                    <LogoMain/>
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                     <Navbar.Collapse className="justify-content-end fs-5" id="basic-navbar-nav">
                         <Nav>
                             <Link href="/"><a className="nav-link">Home</a></Link>
-                            <Nav.Link>Units O/B</Nav.Link>
+                            <Link href="/containersO_B"><a className="nav-link">Units O/B</a></Link>
                             <NavDropdown title="Settings" id="basic-nav-dropdown">
-                                <NavDropdown.Item className="fs-5">Alarms threshold</NavDropdown.Item>
-                                <NavDropdown.Item className="fs-5">General settings</NavDropdown.Item>
+                                <Link href="/settings/settingsThreshold"><a className="fs-5 dropdown-item">Threshold
+                                    Settings </a></Link>
+                                <Link href="/settings/settingsGeneral"><a className="fs-5 dropdown-item">General
+                                    settings</a></Link>
                             </NavDropdown>
-                            <Nav.Link>About</Nav.Link>
+                            <Link href="/about"><a className="nav-link">About</a></Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

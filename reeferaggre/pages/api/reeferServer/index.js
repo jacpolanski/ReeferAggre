@@ -10,7 +10,7 @@ export default async function (req, res) {
     // const filters = JSON.parse(req.body);
     try {
 
-        const file_data = await fs.promises.readFile('./db.json')
+        const file_data = await fs.promises.readFile('./data/db.json')
         const json_data = JSON.parse(file_data)
         // const dataToReturn = json.data.filter();
         res.status(200).json(json_data.data)

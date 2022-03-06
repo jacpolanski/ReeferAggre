@@ -8,7 +8,7 @@ import {HPCardRight} from "../components/HPCardRight";
 import {HPCardCntr} from "../components/HPCardCntr";
 
 
-export default function HomePage() {
+export default function Home() {
     const [date, setDate] = useState(DateTime.now())
 
     useEffect(() => {

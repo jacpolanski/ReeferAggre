@@ -2,15 +2,13 @@ import React, {useEffect, useState} from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Head from "next/head";
-// import { useRouter } from 'next/router'
 import LoginPage from "../components/LoginPage";
 
 
 export const Layout = ({children}) => {
-    const [login, setLogin] = useState(false)
+    const [login, setLogin] = useState(true)
     const [users, setUsers] = useState([])
     const [errMsg, setErrMsg] = useState("text-danger d-none")
-    // const router = useRouter()
 
     useEffect(() => {
         fetch("/api/users")
@@ -30,7 +28,6 @@ export const Layout = ({children}) => {
         if (findUserPass[0].password === pass) {
             setLogin(true)
             setErrMsg("text-danger d-none")
-            // router.push("/HomePage")
         } else {
             setErrMsg("text-danger")
         }

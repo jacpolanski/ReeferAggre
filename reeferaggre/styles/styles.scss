@@ -4,7 +4,8 @@
 body {
   height: 100vh;
   background-image: linear-gradient(180deg, #fff, #66a6ff);
-  background-attachment: fixed;
+  //background: #66a6ff url("../public/timelab-pro-yx20mpDyr2I-unsplash.jpg") no-repeat fixed center/cover;
+
 
   main {
     display: flex;
@@ -57,4 +58,13 @@ body {
 
 .welcome-reeferaggre {
   font-size: 3rem;
+}
+
+.socials-icons {
+  font-size: 5rem;
+}
+.carousel-caption {
+  //position: relative;
+
+  top: 0;
 }

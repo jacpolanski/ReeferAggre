@@ -5,7 +5,7 @@ export default async function (req, res) {
 
     try {
 
-        const fileData = await fs.promises.readFile('./db.json')
+        const fileData = await fs.promises.readFile('./data/db.json')
         const jsonData = JSON.parse(fileData)
 
         const { dates } = req.query

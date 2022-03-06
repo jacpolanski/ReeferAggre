@@ -7,7 +7,7 @@ export const HPCardBtm = () => {
             <Card className="my-1 px-5 py-3">
                 <Card.Body>
                     <Card.Title className="mb-5 text-center"><h2 className="welcome-reeferaggre">Welcome in
-                        ReeferAgree,</h2></Card.Title>
+                        ReeferAggre,</h2></Card.Title>
                     <Card.Text>
                         light-weight and quick daily Reefer readings aggregator with auto malfunction detection,
                         that also allows you to manually enter readings and custom Unit alarms. Additionally app
@@ -18,7 +18,7 @@ export const HPCardBtm = () => {
                         For easy access by clicking below button you will find added company Reefer Units manual and
                         procedures
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <Button variant="primary">Open CRM</Button>
                 </Card.Body>
             </Card>
         </CardGroup>

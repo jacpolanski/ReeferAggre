@@ -13,7 +13,7 @@ const LoginPage = ({users, handleSubmit, errMsg}) => {
     return (
         <>
             <Container className="vh-100 d-flex flex-column justify-content-center">
-                <Row className="justify-content-center">
+                <Row className="justify-content-center rounded-3">
                     <Col lg={5} md={6} sm={12}
                          className="p-5 shadow-sm rounded-lg bg-white d-flex justify-content-center align-items-center login-logo">
                         <div className="login">
