@@ -28,7 +28,7 @@ export default function containersO_B() {
     }, [])
 
     useEffect(() => {
-        console.log(date.toLocaleString());
+
         setYear(date.year)
         setWeek(date.weekNumber)
         const datesFromStr = date.startOf("week")
@@ -39,7 +39,6 @@ export default function containersO_B() {
         }
 
         setDatesToShootString(datesToShoot.join("/"))
-        console.log(datesToShootString);
 
     }, [date])
 

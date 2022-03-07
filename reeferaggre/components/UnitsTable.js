@@ -54,7 +54,7 @@ const UnitsTable = ({datesToShootString}) => {
                 <th className="sticky-header" colSpan={2}>Manifest</th>
                 <th className="sticky-header">Communication Info</th>
                 <th className="sticky-header">Temp</th>
-                {tableData.dates.map(date => <th colSpan={4}>{date}</th>)}
+                {tableData.dates.map(date => <th colSpan={4}>{ (date.length !== 0) ? (`${date.substring(4, 6)} / ${date.substring(2,4)} / 20${date.substring(0,2)}`) : ("")}</th>)}
             </tr>
             <tr className="sticky-header">
                 <th className="sticky-header">Location</th>
