@@ -10,7 +10,7 @@ export default async function (req, res) {
 
         const { dates } = req.query
         const joinedDates = [...dates]
-        console.log(joinedDates);
+        // console.log(joinedDates);
 
         const dateReadings = joinedDates.map(date => jsonData.data.filter(data => data.Date === date))
         console.log(dateReadings);

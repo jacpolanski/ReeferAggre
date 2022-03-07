@@ -1,15 +1,17 @@
 const constructTableData = (queryData) => {
-    const dates = queryData.map(data =>
-        data[0].Date)
+    const dates = queryData.map(data => (data.length !== 0) ? data[0].Date : "")
+    // console.log(dates);
 
     const containersIDReadings = queryData.map(dataset =>
         dataset.map(set => set.Readings.map(reading => reading.ContainerID)))
+    // console.log(containersIDReadings);
 
     const flatten = (array) => {
         return array.reduce((flatten, arr) => [...flatten, ...arr])
     }
 
     const containersIDs = [...new Set(flatten(flatten(containersIDReadings)))]
+    // console.log(containersIDs);
 
     const findContainer = (serialNo) => {
         return queryData.map(dataset =>
@@ -20,13 +22,15 @@ const constructTableData = (queryData) => {
 
     const findContProperty = (serialNo, property) => {
         const containerReadingsArr = findContainer(serialNo)
-        const contReadArrFlat = flatten(containerReadingsArr);
+        const contReadArrFlat = flatten(containerReadingsArr).map(elem => (elem === undefined) ? "" : elem )
+        // console.log((contReadArrFlat).filter(elem => elem !== undefined));
+
         return [...new Set(contReadArrFlat.map(obj => obj[property]))]
     }
 
     const findAllTemps = (serialNo, typeOfTemp) => {
         const containerReadingsArr = findContainer(serialNo)
-        const contReadArrFlat = flatten(containerReadingsArr);
+        const contReadArrFlat = flatten(containerReadingsArr).map(elem => (elem === undefined) ? "" : elem )
         return contReadArrFlat.map(obj => obj[typeOfTemp])
     }
 
@@ -35,12 +39,12 @@ const constructTableData = (queryData) => {
             return [...arr]
         } else {
             return [...arr, {
-                Locations: findContProperty(id, "Location"),
+                Locations: findContProperty(id, "Location")[0],
                 ContainerID: id,
                 Alms: findContProperty(id, "Alms"),
                 LoadPort: findContProperty(id, "LoadPort")[0],
-                DischPort: findContProperty(id, "Disch.Port")[0].substring(0,3),
-                Monitored: findContProperty(id, "Monitored")[0],
+                DischPort: (findContProperty(id, "Disch.Port")[0] !== undefined) ? findContProperty(id, "Disch.Port")[0].substring(0,3) : "",
+                Monitored: findContProperty(id, 'Monitored')[0],
                 TempSP: (!isNaN(parseFloat(findContProperty(id, "Temp SP")[0]))) && parseFloat(findContProperty(id, "Temp SP")[0]).toFixed(2),
                 Supply: findAllTemps(id, "Supply").map(temp =>
                     (!isNaN(parseFloat(temp))) ? parseFloat(temp).toFixed(2) : ""),
@@ -49,7 +53,8 @@ const constructTableData = (queryData) => {
             }]
         }
     }, [])
-    console.log(containers);
+
+    // console.log(containers);
     return {dates, containers}
 }
 
