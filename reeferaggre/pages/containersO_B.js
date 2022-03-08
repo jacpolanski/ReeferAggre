@@ -10,6 +10,7 @@ export default function containersO_B() {
     const [year, setYear] = useState(date.year)
     const [week, setWeek] = useState(date.weekNumber)
     const [datesToShootString, setDatesToShootString] = useState("")
+    const [vesselName, setVesselName] = useState("")
 
     useEffect(() => {
 
@@ -25,7 +26,16 @@ export default function containersO_B() {
 
         //Parse week range to string
         setDatesToShootString(datesToShoot.join("/"))
-    }, [])
+
+        fetch(`/api/settings/settingsGeneral`)
+            .then((resp) => {
+                if (resp.ok === true) return resp.json();
+                else console.log('Wystąpił błąd');
+            })
+            .then((queryData) => {
+                setVesselName(queryData.vesselName)
+            })
+        }, [])
 
     useEffect(() => {
 
@@ -55,7 +65,7 @@ export default function containersO_B() {
     return (
         <>
             <div className="card p-5 text-center table-containers">
-                <Card.Title>M/V Katherine</Card.Title>
+                <Card.Title>{vesselName}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted mb-5">Reefer units on-board</Card.Subtitle>
                 <Card.Subtitle className="mb-2 mb-2">Week {week}, {year}</Card.Subtitle>
                 <Card.Subtitle className="mb-2 mb-2">

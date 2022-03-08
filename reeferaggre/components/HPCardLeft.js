@@ -7,9 +7,29 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 import {ClockDate} from "./ClockDate";
 import {ClockWeek} from "./ClockWeek";
 import {ClockTime} from "./ClockTime";
-import {hpChartData} from "../data/hpChartData";
 
-export const HPCardLeft = ({date}) => {
+
+export const HPCardLeft = ({date, generalSettings}) => {
+
+    const hpChartData = {
+        labels: ['Total RF capacity', 'Remaining capacity'],
+        datasets: [
+            {
+                label: '# of Containers',
+                data: [generalSettings.reeferCapacity, generalSettings.totalCapacity],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 99, 132, 0.0)',
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                ],
+                borderWidth: 1,
+            },
+        ],
+    };
+
     return (
         <Card className="text-center">
             <Card.Body>

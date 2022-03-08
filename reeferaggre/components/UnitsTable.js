@@ -34,14 +34,14 @@ const UnitsTable = ({datesToShootString}) => {
     if (loading) return (
         <div className="d-flex flex-column justify-content-center align-items-center">
             <Spinner animation="border" variant="info" className="mb-5"/>
-            <div className="p-3 mb-2 bg-info text-white col-3">Loading data...</div>
+            <div className="p-3 mb-2 bg-info text-white col-3 text-center">Loading data...</div>
         </div>)
 
     //If no Data
     if (tableData.length === 0) return (
         <div className="d-flex flex-column justify-content-center align-items-center">
             <Spinner animation="grow" variant="warning" className="mb-5"/>
-            <div className="p-3 mb-2 bg-warning text-dark col-3">There are no requested Readings...</div>
+            <div className="p-3 mb-2 bg-warning text-dark col-3 text-center">There are no requested Readings...</div>
         </div>
     )
 
