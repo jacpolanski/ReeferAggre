@@ -1,6 +1,6 @@
 const threSetData = {
-    supplyThreshold: 0,
-    returnThreshold: 0,
+    supplyThreshold: "0",
+    returnThreshold: "0",
 }
 
 export {threSetData}
