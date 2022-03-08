@@ -1,4 +1,4 @@
-import {genSetData} from "../../../data/genSetData";
+import {genSetData} from "../../../data/genSetData.js";
 
 
 export default function handler(request, response) {

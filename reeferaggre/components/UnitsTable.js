@@ -4,8 +4,25 @@ import constructTableData from "./constructTableData";
 
 
 const UnitsTable = ({datesToShootString}) => {
+    const [threshold, setThreshold] = useState({supply: '', return: ''});
     const [tableData, setTableData] = useState({})
     const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+
+        //Shoot for data
+        fetch(`/api/settings/settingsThreshold`)
+            .then((resp) => {
+                if (resp.ok === true) return resp.json();
+                else console.log('Wystąpił błąd');
+            })
+            .then((queryData) => {
+                setThreshold({
+                    supply: queryData.supplyThreshold,
+                    return: queryData.returnThreshold,
+                })
+            })
+    },[])
 
     useEffect(() => {
         setLoading(true)
@@ -86,9 +103,15 @@ const UnitsTable = ({datesToShootString}) => {
                     <td>{container.TempSP}</td>
                     {[...Array(4 * tableData.dates.length)].map((x, i) => {
                         if ((i + 1) % 2 !== 0) {
-                            return <td key={i}>{container.Supply[(i / 2)]}</td>
+                            return <td key={i} className={
+                                (parseFloat(container.Supply) > (parseFloat(threshold.supply) + parseFloat(container.TempSP)))
+                                    ? "bg-warning"
+                                    : ""}>{container.Supply[(i / 2)]}</td>
                         } else {
-                            return <td key={i}>{container.Return[(i / 2 - 0.5)]}</td>
+                            return <td key={i} className={
+                                (parseFloat(container.Return) > (parseFloat(threshold.return) + parseFloat(container.TempSP)))
+                                    ? "bg-warning"
+                                    : ""}>{container.Return[(i / 2 - 0.5)]}</td>
                         }
                     })}
                 </tr>)}

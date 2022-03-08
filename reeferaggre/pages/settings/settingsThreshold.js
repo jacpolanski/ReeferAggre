@@ -3,8 +3,8 @@ import {Card, Container, Form, Button} from "react-bootstrap";
 
 export default function SettingsThreshold() {
     const [form, setForm] = useState({supplyThreshold: '', returnThreshold: ''});
-    const [toggleSupply, setToggleSupply] = useState(false)
-    const [toggleReturn, setToggleReturn] = useState(false)
+    const [toggleSupply, setToggleSupply] = useState()
+    const [toggleReturn, setToggleReturn] = useState()
 
 
     useEffect(() => {
@@ -25,10 +25,18 @@ export default function SettingsThreshold() {
 
     const handleSupplyToggle = () => {
         setToggleSupply(prevState => !prevState)
+        setForm(prevState => ({
+            ...prevState,
+            supplyThreshold: 0,
+        }))
     }
 
     const handleReturnToggle = () => {
         setToggleReturn(prevState => !prevState)
+        setForm(prevState => ({
+            ...prevState,
+            returnThreshold: 0,
+        }))
     }
 
     const handleChange = (e) => {
@@ -38,10 +46,12 @@ export default function SettingsThreshold() {
             ...prevForm,
             [name]: value,
         }));
+
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        console.log(form);
         await fetch('/api/settings/settingsThreshold', {
             method: 'PUT',
             body: JSON.stringify({form}),
@@ -80,6 +90,7 @@ export default function SettingsThreshold() {
                                             name="supplyThreshold"
                                             value={form.supplyThreshold}
                                             onChange={handleChange}
+                                            disabled={!toggleSupply}
                                         />
                                     </div>
                                     <Form.Range
@@ -89,6 +100,7 @@ export default function SettingsThreshold() {
                                         step="0.01"
                                         min="0"
                                         max="3"
+                                        disabled={!toggleSupply}
                                     />
                                 </Form.Group>
 
@@ -110,6 +122,7 @@ export default function SettingsThreshold() {
                                             name="returnThreshold"
                                             value={form.returnThreshold}
                                             onChange={handleChange}
+                                            disabled={!toggleReturn}
                                         />
                                     </div>
                                     <Form.Range
@@ -119,6 +132,7 @@ export default function SettingsThreshold() {
                                         step="0.01"
                                         min="0"
                                         max="3"
+                                        disabled={!toggleReturn}
                                     />
                                 </Form.Group>
 

@@ -1,4 +1,4 @@
-import {threSetData} from "../../../data/threSetData";
+import {threSetData} from "../../../data/threSetData.js";
 
 export default function handler(request, response) {
     const { method } = request;
