@@ -8,7 +8,7 @@ import {JSONFile, Low} from "lowdb"
 const dir = "./runner/csv/"
 
 //database init
-const file = join(resolve(), 'db.json')
+const file = join(resolve(), './data/db.json')
 const adapter = new JSONFile(file)
 const db = new Low(adapter)
 await db.read();
