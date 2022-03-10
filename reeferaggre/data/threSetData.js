@@ -1,6 +1,1 @@
-let threSetData = {
-    supplyThreshold: 0,
-    returnThreshold: 0,
-}
-
-export {threSetData}
+export let threSetData = {isSupply: true, supplyThreshold: 1, isReturn: true, returnThreshold: 1,}

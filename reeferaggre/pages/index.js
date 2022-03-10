@@ -29,7 +29,6 @@ export default function Home() {
                 setGeneralSettings(settings)
                 setLoading(false)
             })
-        console.log(generalSettings)
 
         return () => {
             clearInterval(updateDate)
@@ -52,7 +51,7 @@ export default function Home() {
                 <CardGroup className="flex-grow-0">
                     <HPCardLeft date={date} generalSettings={generalSettings}/>
                     <HPCardCntr/>
-                    <HPCardRight/>
+                    <HPCardRight date={date}/>
                 </CardGroup>
                 <HPCardBtm/>
             </Row>

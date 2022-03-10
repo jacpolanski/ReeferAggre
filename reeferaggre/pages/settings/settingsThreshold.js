@@ -16,12 +16,16 @@ export default function SettingsThreshold() {
                 else console.log('Wystąpił błąd');
             })
             .then((queryData) => {
+                console.log(queryData);
                 setForm({
                     supplyThreshold: queryData.supplyThreshold,
                     returnThreshold: queryData.returnThreshold,
                 })
+                setToggleSupply(queryData.isSupply)
+                setToggleReturn(queryData.isReturn)
             })
-    },[])
+        console.log(toggleSupply, toggleReturn);
+    }, [])
 
     const handleSupplyToggle = () => {
         setToggleSupply(prevState => !prevState)
@@ -54,7 +58,11 @@ export default function SettingsThreshold() {
         console.log(form);
         await fetch('/api/settings/settingsThreshold', {
             method: 'PUT',
-            body: JSON.stringify({form}),
+            body: JSON.stringify({
+                ...form,
+                isReturn: toggleReturn,
+                isSupply: toggleSupply,
+            }),
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -78,7 +86,7 @@ export default function SettingsThreshold() {
                                             type="switch"
                                             id="custom-switch"
                                             label="Off"
-                                            // value={toggleSupply}
+                                            defaultChecked={toggleSupply}
                                             onClick={(e) => handleSupplyToggle(e)}
                                         />
                                         <Form.Control
@@ -111,6 +119,7 @@ export default function SettingsThreshold() {
                                             type="switch"
                                             id="custom-switch"
                                             label="Off"
+                                            defaultChecked={toggleReturn}
                                             onClick={(e) => handleReturnToggle(e)}
                                         />
                                         <Form.Control

@@ -34,5 +34,6 @@ yarn-error.log*
 # vercel
 .vercel
 
-# csv dataset
-../csv
+#/reeferaggre/pages/api/csv/
+/reeferaggre/runner/csv/
+db.json

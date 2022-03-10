@@ -106,3 +106,5 @@ dist
 #CSV dataset
 
 #/reeferaggre/pages/api/csv/
+/reeferaggre/runner/csv/
+db.json

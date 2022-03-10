@@ -3,6 +3,9 @@ import {Table, Spinner} from "react-bootstrap";
 import constructTableData from "./constructTableData";
 
 
+
+
+
 const UnitsTable = ({datesToShootString}) => {
     const [threshold, setThreshold] = useState({supply: '', return: ''});
     const [tableData, setTableData] = useState({})
@@ -41,10 +44,7 @@ const UnitsTable = ({datesToShootString}) => {
                     setTableData(constructTableData(queryData))
                     setLoading(false)
                 }
-
             })
-
-
     }, [datesToShootString])
 
     //If loading Data
@@ -71,7 +71,7 @@ const UnitsTable = ({datesToShootString}) => {
                 <th className="sticky-header" colSpan={2}>Manifest</th>
                 <th className="sticky-header">Communication Info</th>
                 <th className="sticky-header">Temp</th>
-                {tableData.dates.map((date, i) => <th colSpan={4} key={i}>{ (date.length !== 0) ? (`${date.substring(4, 6)} / ${date.substring(2,4)} / 20${date.substring(0,2)}`) : ("")}</th>)}
+                {tableData.dates.map((date, i) => <th colSpan={4} key={(i + 1) * Math.floor(Math.random() * 10000 + 1)}>{ (date.length !== 0) ? (`${date.substring(4, 6)} / ${date.substring(2,4)} / 20${date.substring(0,2)}`) : ("")}</th>)}
             </tr>
             <tr className="sticky-header">
                 <th className="sticky-header">Location</th>
@@ -81,37 +81,41 @@ const UnitsTable = ({datesToShootString}) => {
                 <th className="sticky-header">Disch.Port</th>
                 <th className="sticky-header">Monitored</th>
                 <th className="sticky-header">SP</th>
-                {tableData.dates.map(() =>
+                {tableData.dates.map((i) =>
                     <>
-                        <th className="sticky-header">Supply AM</th>
-                        <th className="sticky-header">Return AM</th>
-                        <th className="sticky-header">Supply PM</th>
-                        <th className="sticky-header">Return PM</th>
+                        <th key={(i + 1) * Math.floor(Math.random() * 10000 + 1)} className="sticky-header">Supply AM</th>
+                        <th key={(i + 1) * Math.floor(Math.random() * 10000 + 1)} className="sticky-header">Return AM</th>
+                        <th key={(i + 1) * Math.floor(Math.random() * 10000 + 1)} className="sticky-header">Supply PM</th>
+                        <th key={(i + 1) * Math.floor(Math.random() * 10000 + 1)} className="sticky-header">Return PM</th>
                     </>
                 )}
             </tr>
             </thead>
             <tbody>
-            {tableData.containers.map(container =>
+            {tableData.containers.map((container, i) =>
                 <tr key={container.ContainerID}>
-                    <td>{container.Locations}</td>
-                    <td>{container.ContainerID}</td>
-                    <td>{container.Alms}</td>
-                    <td>{container.LoadPort}</td>
-                    <td>{container.DischPort}</td>
-                    <td>{container.Monitored}</td>
-                    <td>{container.TempSP}</td>
+                    <td key={(i + 1) * Math.floor(Math.random() * 10000 + 1)}>{container.Locations}</td>
+                    <td key={(i + 1) * Math.floor(Math.random() * 10000 + 1)}>{container.ContainerID}</td>
+                    <td key={(i + 1) * Math.floor(Math.random() * 10000 + 1)}>{container.Alms}</td>
+                    <td key={(i + 1) * Math.floor(Math.random() * 10000 + 1)}>{container.LoadPort}</td>
+                    <td key={(i + 1) * Math.floor(Math.random() * 10000 + 1)}>{container.DischPort}</td>
+                    <td key={(i + 1) * Math.floor(Math.random() * 10000 + 1)}>{container.Monitored}</td>
+                    <td key={(i + 1) * Math.floor(Math.random() * 10000 + 1)}>{(typeof container.TempSP === "number") && container.TempSP.toFixed(2)}</td>
                     {[...Array(4 * tableData.dates.length)].map((x, i) => {
                         if ((i + 1) % 2 !== 0) {
-                            return <td key={i} className={
-                                (parseFloat(container.Supply) > (parseFloat(threshold.supply) + parseFloat(container.TempSP)))
+                            return <td key={(i + 1) * Math.floor(Math.random() * 10000 + 1)} className={
+                                (container.Supply[(i / 2)] !== "" && threshold.supply !== 0 && (typeof container.TempSP === "number")) &&
+                                (container.Supply[(i / 2)] > threshold.supply + container.TempSP)
                                     ? "bg-warning"
-                                    : ""}>{container.Supply[(i / 2)]}</td>
+                                    : ""
+                            }>{(typeof container.Supply[(i / 2)] === "number") && container.Supply[(i / 2)].toFixed(2)}</td>
                         } else {
-                            return <td key={i} className={
-                                (parseFloat(container.Return) > (parseFloat(threshold.return) + parseFloat(container.TempSP)))
+                            return <td key={(i + 1) * Math.floor(Math.random() * 10000 + 1)} className={
+                                (container.Return[(i / 2 - 0.5)] !== ""  && threshold.return !== 0 && (typeof container.TempSP === "number")) &&
+                                (container.Return[(i / 2 - 0.5)] > threshold.return + container.TempSP)
                                     ? "bg-warning"
-                                    : ""}>{container.Return[(i / 2 - 0.5)]}</td>
+                                    : ""
+                            }>{(typeof container.Return[(i / 2 - 0.5)] === "number") &&  container.Return[(i / 2 - 0.5)].toFixed(2)}</td>
                         }
                     })}
                 </tr>)}

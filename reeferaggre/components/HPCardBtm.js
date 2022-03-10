@@ -6,8 +6,8 @@ export const HPCardBtm = () => {
         <CardGroup>
             <Card className="my-1 px-5 py-3">
                 <Card.Body>
-                    <Card.Title className="mb-5 text-center"><h2 className="welcome-reeferaggre">Welcome in
-                        ReeferAggre,</h2></Card.Title>
+                    <Card.Title className="mb-3 text-center"><h3 className="welcome-reeferaggre">Welcome in
+                        ReeferAggre,</h3></Card.Title>
                     <Card.Text>
                         light-weight and quick daily Reefer readings aggregator with auto malfunction detection,
                         that also allows you to manually enter readings and custom Unit alarms. Additionally app

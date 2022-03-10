@@ -1,6 +1,1 @@
-export let genSetData = {
-    vesselName: "M/V Banana",
-    reeferCapacity: 1150,
-    totalCapacity: 6520,
-}
-
+export let genSetData = {vesselName: "M/V Banana 3", reeferCapacity: 1500, totalCapacity: 5000,}

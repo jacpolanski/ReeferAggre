@@ -43,13 +43,13 @@ const constructTableData = (queryData) => {
                 ContainerID: id,
                 Alms: findContProperty(id, "Alms"),
                 LoadPort: findContProperty(id, "LoadPort")[0],
-                DischPort: (findContProperty(id, "Disch.Port")[0] !== undefined) ? findContProperty(id, "Disch.Port")[0].substring(0,3) : "",
+                DischPort: (findContProperty(id, "Disch.Port")[0] !== undefined) ? findContProperty(id, "Disch.Port")[0].substring(0,5) : "",
                 Monitored: findContProperty(id, 'Monitored')[0],
-                TempSP: (!isNaN(parseFloat(findContProperty(id, "Temp SP")[0]))) && parseFloat(findContProperty(id, "Temp SP")[0]).toFixed(2),
+                TempSP: (!isNaN(parseFloat(findContProperty(id, "Temp SP")[0]))) && parseFloat(parseFloat(findContProperty(id, "Temp SP")[0]).toFixed(2)),
                 Supply: findAllTemps(id, "Supply").map(temp =>
-                    (!isNaN(parseFloat(temp))) ? parseFloat(temp).toFixed(2) : ""),
+                    (!isNaN(parseFloat(temp))) ? parseFloat(parseFloat(temp).toFixed(2)) : ""),
                 Return: findAllTemps(id, "Return").map(temp =>
-                    (!isNaN(parseFloat(temp))) ? parseFloat(temp).toFixed(2) : ""),
+                    (!isNaN(parseFloat(temp))) ? parseFloat(parseFloat(temp).toFixed(2)) : ""),
             }]
         }
     }, [])
