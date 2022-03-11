@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Table, Spinner, Modal} from "react-bootstrap";
+import {Table, Spinner, Modal, Form, Button, Col, Row} from "react-bootstrap";
 import constructTableData from "./constructTableData";
 import uniqid from "uniqid"
 
@@ -24,7 +24,7 @@ const UnitsTable = ({datesToShootString}) => {
     const [threshold, setThreshold] = useState({supply: '', return: ''});
     const [tableData, setTableData] = useState({})
     const [loading, setLoading] = useState(true);
-    const [modalContID, setModalContID] = useState();
+    const [modalContID, setModalContID] = useState("");
     const [show, setShow] = useState(false);
     const [options, setOptions] = useState()
     const [data, setData] = useState()
@@ -107,7 +107,7 @@ const UnitsTable = ({datesToShootString}) => {
                                 borderDashOffset: 0,
                                 borderWidth: 3,
                                 label: {
-                                    enabled: (threshold.supply !== 0 ),
+                                    enabled: (threshold.supply !== 0),
                                     content: "Supply threshold",
                                     position: 'start',
                                     backgroundColor: 'rgba(53, 162, 235, 0.5)',
@@ -123,7 +123,7 @@ const UnitsTable = ({datesToShootString}) => {
                                 borderDashOffset: 0,
                                 borderWidth: 3,
                                 label: {
-                                    enabled: (threshold.return !== 0 ),
+                                    enabled: (threshold.return !== 0),
                                     content: "Return threshold",
                                     position: 'end',
                                     backgroundColor: 'rgba(255, 99, 132, 0.5)',
@@ -159,12 +159,14 @@ const UnitsTable = ({datesToShootString}) => {
     }, [show])
 
     const handleShow = (e) => {
-        console.log("jestem");
-        console.log(tableData.containers.filter(container => container.ContainerID === modalContID));
+        e.preventDefault()
         setModalContID(e.currentTarget.id);
         setShow(true)
-        console.log(tableData.containers.filter(container => container.ContainerID === modalContID)[0].Supply);
-        console.log(tableData.dates);
+    }
+
+    const handleShowSelect = (e) => {
+        e.preventDefault()
+        setShow(true)
     }
 
 
@@ -186,67 +188,87 @@ const UnitsTable = ({datesToShootString}) => {
     //If Data received properly
     return (
         <>
-            <Table striped bordered hover size="sm" className="table-fixed">
-                <thead className="sticky-header">
-                <tr className="sticky-header">
-                    <th className="sticky-header" colSpan={3}>Standard Info</th>
-                    <th className="sticky-header" colSpan={2}>Manifest</th>
-                    <th className="sticky-header">Communication Info</th>
-                    <th className="sticky-header">Temp</th>
-                    {tableData.dates.map((date) => <th colSpan={4}
-                                                          key={uniqid()}>{(date.length !== 0) ? (`${date.substring(4, 6)} / ${date.substring(2, 4)} / 20${date.substring(0, 2)}`) : ("")}</th>)}
-                </tr>
-                <tr className="sticky-header">
-                    <th className="sticky-header">Location</th>
-                    <th className="sticky-header">ContainerID</th>
-                    <th className="sticky-header">Malf</th>
-                    <th className="sticky-header">LoadPort</th>
-                    <th className="sticky-header">Disch.Port</th>
-                    <th className="sticky-header">Monitored</th>
-                    <th className="sticky-header">SP</th>
-                    {tableData.dates.map(() =>
-                        <>
-                            <th key={uniqid()} className="sticky-header">Supply AM</th>
-                            <th key={uniqid()} className="sticky-header">Return AM</th>
-                            <th key={uniqid()} className="sticky-header">Supply PM</th>
-                            <th key={uniqid()} className="sticky-header">Return PM</th>
-                        </>
-                    )}
-                </tr>
-                </thead>
-                <tbody>
-                {tableData.containers.map((container) =>
-                    <tr key={uniqid()} id={container.ContainerID} onClick={e => handleShow(e)}>
-                        <td key={uniqid()}>{container.Locations}</td>
-                        <td key={uniqid()}>{container.ContainerID}</td>
-                        <td key={uniqid()}>{container.Alms}</td>
-                        <td key={uniqid()}>{container.LoadPort}</td>
-                        <td key={uniqid()}>{container.DischPort}</td>
-                        <td key={uniqid()}>{container.Monitored}</td>
-                        <td key={uniqid()}>{(typeof container.TempSP === "number") && container.TempSP.toFixed(2)}</td>
-                        {[...Array(4 * tableData.dates.length)].map((x, i) => {
-                            if ((i + 1) % 2 !== 0) {
-                                return <td key={uniqid()} className={
-                                    (container.Supply[(i / 2)] !== "" && threshold.supply !== 0 && (typeof container.TempSP === "number")) &&
-                                    (container.Supply[(i / 2)] > threshold.supply + container.TempSP)
-                                        ? "bg-warning"
-                                        : ""
-                                }>{(typeof container.Supply[(i / 2)] === "number") && container.Supply[(i / 2)].toFixed(2)}</td>
-                            } else {
-                                return <td key={uniqid()} className={
-                                    (container.Return[(i / 2 - 0.5)] !== "" && threshold.return !== 0 && (typeof container.TempSP === "number")) &&
-                                    (container.Return[(i / 2 - 0.5)] > threshold.return + container.TempSP)
-                                        ? "bg-warning"
-                                        : ""
-                                }>{(typeof container.Return[(i / 2 - 0.5)] === "number") && container.Return[(i / 2 - 0.5)].toFixed(2)}</td>
-                            }
-                        })}
-                    </tr>)}
-                </tbody>
-            </Table>
+            <Form onSubmit={e => handleShowSelect(e)} className="mb-2">
+                <Row className="row g-3 justify-content-center align-items-center">
+                    <Col className="col-auto">
+                        <Form.Label>Select Unit</Form.Label>
+                    </Col>
+                    <Col className="col-2">
+                        <Form.Select className="col-6" value={modalContID} onChange={(e) => setModalContID(e.target.value)}>
+                            {tableData.containers.map(container => (container.ContainerID !== undefined) ? (<option key={uniqid()} value={container.ContainerID}>{container.ContainerID}</option>) : null)}
+                        </Form.Select>
+                    </Col>
+                    <Col className="col-auto">
+                        <Button variant="success btn-block" type="submit" className="bg-primary">
+                            Load Chart
+                        </Button>
+                    </Col>
+                </Row>
+            </Form>
+
+            <div className="table-wrapper">
+                <Table striped bordered hover size="sm" className="table-fixed">
+                    <thead className="sticky-header">
+                    <tr className="sticky-header">
+                        <th className="sticky-header" colSpan={3}>Standard Info</th>
+                        <th className="sticky-header" colSpan={2}>Manifest</th>
+                        <th className="sticky-header">Communication Info</th>
+                        <th className="sticky-header">Temp</th>
+                        {tableData.dates.map((date) => <th colSpan={4}
+                                                           key={uniqid()}>{(date.length !== 0) ? (`${date.substring(4, 6)} / ${date.substring(2, 4)} / 20${date.substring(0, 2)}`) : ("")}</th>)}
+                    </tr>
+                    <tr className="sticky-header">
+                        <th className="sticky-header">Location</th>
+                        <th className="sticky-header">ContainerID</th>
+                        <th className="sticky-header">Malf</th>
+                        <th className="sticky-header">LoadPort</th>
+                        <th className="sticky-header">Disch.Port</th>
+                        <th className="sticky-header">Monitored</th>
+                        <th className="sticky-header">SP</th>
+                        {tableData.dates.map(() =>
+                            <>
+                                <th key={uniqid()} className="sticky-header">Supply AM</th>
+                                <th key={uniqid()} className="sticky-header">Return AM</th>
+                                <th key={uniqid()} className="sticky-header">Supply PM</th>
+                                <th key={uniqid()} className="sticky-header">Return PM</th>
+                            </>
+                        )}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {tableData.containers.map((container) =>
+                        <tr key={uniqid()} id={container.ContainerID} onClick={e => handleShow(e)}>
+                            <td key={uniqid()}>{container.Locations}</td>
+                            <td key={uniqid()}>{container.ContainerID}</td>
+                            <td key={uniqid()}>{container.Alms}</td>
+                            <td key={uniqid()}>{container.LoadPort}</td>
+                            <td key={uniqid()}>{container.DischPort}</td>
+                            <td key={uniqid()}>{container.Monitored}</td>
+                            <td key={uniqid()}>{(typeof container.TempSP === "number") && container.TempSP.toFixed(2)}</td>
+                            {[...Array(4 * tableData.dates.length)].map((x, i) => {
+                                if ((i + 1) % 2 !== 0) {
+                                    return <td key={uniqid()} className={
+                                        (container.Supply[(i / 2)] !== "" && threshold.supply !== 0 && (typeof container.TempSP === "number")) &&
+                                        (container.Supply[(i / 2)] > threshold.supply + container.TempSP)
+                                            ? "bg-warning"
+                                            : ""
+                                    }>{(typeof container.Supply[(i / 2)] === "number") && container.Supply[(i / 2)].toFixed(2)}</td>
+                                } else {
+                                    return <td key={uniqid()} className={
+                                        (container.Return[(i / 2 - 0.5)] !== "" && threshold.return !== 0 && (typeof container.TempSP === "number")) &&
+                                        (container.Return[(i / 2 - 0.5)] > threshold.return + container.TempSP)
+                                            ? "bg-warning"
+                                            : ""
+                                    }>{(typeof container.Return[(i / 2 - 0.5)] === "number") && container.Return[(i / 2 - 0.5)].toFixed(2)}</td>
+                                }
+                            })}
+                        </tr>)}
+                    </tbody>
+                </Table>
+            </div>
             <Modal show={show} fullscreen={true} onHide={() => setShow(false)}>
                 <Modal.Header closeButton>
-                    <LogoMain />
+                    <LogoMain/>
                     <Modal.Title className="justify-self-center">
                         Weekly temperature chart
                     </Modal.Title>
@@ -283,10 +305,9 @@ const UnitsTable = ({datesToShootString}) => {
                     </div>
                 </Modal.Body>
             </Modal>
+
         </>
-    )
-
-
+)
 }
 
 export default UnitsTable

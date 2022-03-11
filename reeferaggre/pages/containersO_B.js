@@ -66,7 +66,7 @@ export default function containersO_B() {
         <>
             <div className="card p-5 text-center table-containers">
                 <Card.Title>{vesselName}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted mb-5">Reefer units on-board</Card.Subtitle>
+                <Card.Subtitle className="mb-2 text-muted mb-2">Reefer units on-board</Card.Subtitle>
                 <Card.Subtitle className="mb-2 mb-2">Week {week}, {year}</Card.Subtitle>
                 <Card.Subtitle className="mb-2 mb-2">
                     <Button variant="outline-secondary"
@@ -80,9 +80,9 @@ export default function containersO_B() {
                         Next week <FontAwesomeIcon icon={faForward}/>
                     </Button>
                 </Card.Subtitle>
-                <div className="table-wrapper">
+
                     <UnitsTable datesToShootString={datesToShootString}/>
-                </div>
+
             </div>
         </>
     )
