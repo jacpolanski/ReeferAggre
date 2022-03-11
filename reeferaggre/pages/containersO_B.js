@@ -35,7 +35,7 @@ export default function containersO_B() {
             .then((queryData) => {
                 setVesselName(queryData.vesselName)
             })
-        }, [])
+    }, [])
 
     useEffect(() => {
 
@@ -80,9 +80,9 @@ export default function containersO_B() {
                         Next week <FontAwesomeIcon icon={faForward}/>
                     </Button>
                 </Card.Subtitle>
-
+                <div className="outer-wrapper">
                     <UnitsTable datesToShootString={datesToShootString}/>
-
+                </div>
             </div>
         </>
     )
