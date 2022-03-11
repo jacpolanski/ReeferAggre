@@ -16,7 +16,7 @@ export const HPCardLeft = ({date, generalSettings}) => {
         datasets: [
             {
                 label: '# of Containers',
-                data: [generalSettings.reeferCapacity, generalSettings.totalCapacity],
+                data: [generalSettings.reeferCapacity, generalSettings.totalCapacity - generalSettings.reeferCapacity],
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.2)',
                     'rgba(255, 99, 132, 0.0)',

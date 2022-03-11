@@ -60,13 +60,16 @@ export const HPCardRight = ({date}) => {
     //Check alarms - type "supply", "return", noReadings"
     const checkAlarms = (data) => {
         let alarms = [0, 0, 0]
+        console.log(data.containers);
         data.containers.forEach(container => {
             container.Supply.forEach(reading => {
-                (reading !== "") && (threshold.supply !== 0) && (typeof container.TempSP === "number") && (reading > container.TempSP + threshold.supply) && (alarms[0] += 1);
+                (reading !== "") && (threshold.supply !== 0) && (typeof container.TempSP === "number") &&
+                (reading > container.TempSP + threshold.supply) && (alarms[0] += 1);
                 (reading === "") && (alarms[2] += 1);
             })
             container.Return.forEach(reading => {
-                (reading !== "") && (threshold.supply !== 0) && (typeof container.TempSP === "number") && (reading > container.TempSP + threshold.return) && (alarms[1] += 1);
+                (reading !== "") && (threshold.supply !== 0) && (typeof container.TempSP === "number") &&
+                (reading > container.TempSP + threshold.return) && (alarms[1] += 1);
                 (reading === "") && (alarms[2] += 1);
             })
         })

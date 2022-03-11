@@ -6,7 +6,7 @@ import LoginPage from "../components/LoginPage";
 
 
 export const Layout = ({children}) => {
-    const [login, setLogin] = useState(true)
+    const [login, setLogin] = useState(false)
     const [users, setUsers] = useState([])
     const [errMsg, setErrMsg] = useState("text-danger d-none")
 
@@ -36,7 +36,7 @@ export const Layout = ({children}) => {
     return(
         <>
             <Head>
-                <title>Create Next App</title>
+                <title>ReeferAggre</title>
                 <meta name="ReeferAggre" content="Light-weight and quick daily Reefer readings aggregator with auto malfunction detection,
                         that also allows you to manually enter readings and custom Unit alarms. Additionally app
                         features export to excel capabilities."/>

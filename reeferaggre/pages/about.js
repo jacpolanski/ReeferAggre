@@ -21,11 +21,9 @@ export default function About() {
                                     <div>
                                         <h2 className="text-dark mb-5">Hi, my name is Jacek,</h2>
                                         <p className="card-text bg-25 fs-4 text-dark">
-                                            I'm a Front-End developer, with former experience in Merchant Navy. I'm
-                                            interested in
-                                            wide range of frontend technologies and working on ambitious projects with
-                                            positive
-                                            people.
+                                            I'm a Front-End developer, with former experience in Merchant Navy.
+                                            Interested in wide range of frontend technologies and working on ambitious
+                                            projects with positive people.
                                         </p>
                                     </div>
                                 </div>
@@ -42,10 +40,9 @@ export default function About() {
                             <Carousel.Caption>
                                 <div className="bg-opacity-50 bg-white rounded-3 p-5">
                                     <div>
-                                        <p className="card-text bg-25 fs-4 text-dark">I am well organised, problem solver
-                                            employee with high motivation to
-                                            learn. Fan of hiking, aquarium hobbyist and fish-keeper.
-
+                                        <p className="card-text bg-25 fs-4 text-dark">
+                                            I am well organized person, good at problem solving, eager to learn new
+                                            technologies. Fan of hiking, aquarium hobbyist and fish-keeper.
                                         </p>
                                     </div>
                                 </div>
@@ -62,11 +59,9 @@ export default function About() {
                             <Carousel.Caption>
                                 <div className="bg-opacity-50 bg-white rounded-3 p-5">
                                     <div>
-                                        <p className="card-text bg-25 fs-4 text-dark">I'm father of
-                                            two, girl and boy and family person. I’m interested in job
-                                            opportunities. However, if you have other request or question, don’t
-                                            hesitate
-                                            contact me on below socials.
+                                        <p className="card-text bg-25 fs-4 text-dark">Father of two, girl and boy and
+                                            family person. Looking for interesting job opportunities. Do not hesitate
+                                            contact me on below socials if you have any questions.
                                         </p>
                                     </div>
                                 </div>
@@ -82,5 +77,5 @@ export default function About() {
             </div>
         </Container>
 
-)
+    )
 }
