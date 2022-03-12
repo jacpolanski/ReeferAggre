@@ -1,12 +1,8 @@
 import React from "react";
-import {DateTime} from "luxon";
+import { DateTime } from "luxon";
 
-const ClockTime = ({date}) => {
-    return (
-        <>
-            {date.toLocaleString(DateTime.TIME_WITH_SECONDS)}
-        </>
-    )
-}
+const ClockTime = ({ date }) => {
+  return <>{date.toLocaleString(DateTime.TIME_WITH_SECONDS)}</>;
+};
 
-export {ClockTime}
+export { ClockTime };
