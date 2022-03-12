@@ -4,9 +4,9 @@ import { Button, Card, CardGroup } from "react-bootstrap";
 export const HPCardBtm = () => {
   return (
     <CardGroup>
-      <Card className="my-1 px-5 py-3">
+      <Card className="my-1 px-5 py-2">
         <Card.Body>
-          <Card.Title className="mb-3 text-center">
+          <Card.Title className="mb-2 text-center">
             <h3 className="welcome-reeferaggre">Welcome in ReeferAggre,</h3>
           </Card.Title>
           <Card.Text>
@@ -15,7 +15,7 @@ export const HPCardBtm = () => {
             readings and custom Unit alarms. Additionally app features export to
             excel capabilities.
           </Card.Text>
-          <hr className="my-4" />
+          <hr className="my-3" />
           <Card.Text>
             For easy access by clicking below button you will find added company
             Reefer Units manual and procedures
