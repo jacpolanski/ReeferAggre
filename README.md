@@ -83,4 +83,4 @@ Room for improvement:
 
 ## Contact
 
-Created by [_jac.polanski_](https://www.linkedin.com/in/polanski-jacek/) - feel free to contact me!
+Created by [_jac.polanski_](https://www.linkedin.com/in/polanski-jacek/) - feel free to contact me! 
