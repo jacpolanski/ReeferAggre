@@ -1,7 +1,7 @@
 # ReeferAggre
 
 > Final project created at end of CodersLab bootcamp. It is a light-weight and quick daily Reefer readings aggregator with auto malfunction detection, that also allows you to manually enter readings and custom Unit alarms.
-> Live demo not yet available (there is a necessity to create fake database adding "daily" readings). Current version operates on real data generated onboard of vessel, parsed by `./runner/parseFiles.js`
+> Live demo not yet available (there is a necessity to create fake database adding "daily" readings). Current version operates on real data generated onboard of vessel, parsed in `./runner/parseFiles.js`
 
 ## Table of Contents
 
